@@ -39,7 +39,7 @@ Now, when you have a merge conflict that needs resolving, just type:
 git mergetool
 ```
 
-Diffmerge will automatically open the relevant files that need merging, and allow you to resolve the conflict.
+Diffmerge will automatically open the files that need merging, and allow you to resolve the conflict.
 
 Codebases:
   A story
