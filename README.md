@@ -30,6 +30,7 @@ git config --global difftool.diffmerge.cmd "/usr/local/bin/diffmerge \"\$LOCAL\"
 
 git config --global merge.tool diffmerge
 git config --global mergetool.diffmerge.trustExitCode true
+git config --global mergetool.keepBackup false
 git config --global mergetool.diffmerge.cmd "/usr/local/bin/diffmerge --merge --result=\"\$MERGED\" \"\$LOCAL\" \"\$BASE\" \"\$REMOTE\""
 ```
 
@@ -40,6 +41,28 @@ git mergetool
 ```
 
 Diffmerge will automatically open the files that need merging, and allow you to resolve the conflict.
+
+## Using Diffmerge
+
+### Charles Dickens and his editor
+
+Not a lot of people know that while writing a tale of two cities, Charles Dickens used Git to more efficiently work with his editor. He was sick of his changes being overwritten by his editor, and found copying the editors changes he wanted to be inefficient.
+
+#### Situation 1: Two changes to the same line
+
+If you open chapter 1, you'll find that Dickens' famous opening line has not been written, but that his editor is pushing him to write something.
+
+Dickens creates a new branch (`opening-line`) and writes a masterpiece. His editor has also taken a crack at the `first-paragraph`, and merged his changes into master to get things rolling. When Dickens tries to push his changes, he's asked to pull, and when he does pull, there's a merge conflict.
+
+Simulate this by checking out Dickens' branch, and trying to merge `first-paragraph` into it.
+
+```
+git fetch
+git checkout opening-line
+git merge first-paragraph
+```
+
+
 
 Codebases:
   A story
