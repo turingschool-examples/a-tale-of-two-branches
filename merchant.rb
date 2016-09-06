@@ -7,14 +7,6 @@ class Merchant < ActiveRecord::Base
     order("RANDOM()").first
   end
 
-  def calculate_items
-    invoices.succesful.joins(:invoice_items).sum(:quantity)
-  end
-
-  def calculate_revenue
-    invoices.succesful.joins(:invoice_items).sum("unit_price * quantity")
-  end
-
   def self.most_items_merchant(quantity)
     all.sort_by(&:calculate_items).reverse[0...quantity.to_i]
   end
@@ -30,6 +22,13 @@ class Merchant < ActiveRecord::Base
     {"revenue" => revenue }
   end
 
+  def self.pending_invoice(id)
+    invoice_ids         = Merchant.find(id).invoices.pluck(:id)
+    pending_invoice_ids = Transaction.where(invoice_id: invoice_ids).where(result: "failed").pluck(:invoice_id)
+    customer_ids        = Invoice.find(pending_invoice_ids).map{|invoice| invoice.customer.id}
+    Customer.find(customer_ids)
+  end
+
   def self.top_customer(id)
     invoice_ids         = Merchant.find(id).invoices.pluck(:id)
     paid_invoice_ids    = Transaction.where(invoice_id: invoice_ids).where(result: "success").pluck(:invoice_id)
@@ -39,11 +38,14 @@ class Merchant < ActiveRecord::Base
     Customer.find(top_customer_id)
   end
 
-  def self.pending_invoice(id)
-    invoice_ids         = Merchant.find(id).invoices.pluck(:id)
-    pending_invoice_ids = Transaction.where(invoice_id: invoice_ids).where(result: "failed").pluck(:invoice_id)
-    customer_ids        = Invoice.find(pending_invoice_ids).map{|invoice| invoice.customer.id}
-    Customer.find(customer_ids)
-  end
+  private
+
+    def calculate_items
+      invoices.succesful.joins(:invoice_items).sum(:quantity)
+    end
+
+    def calculate_revenue
+      invoices.succesful.joins(:invoice_items).sum("unit_price * quantity")
+    end
 
 end
