@@ -99,6 +99,8 @@ Dickens' editor moved a paragraph. It just so happens to be the paragraph that D
 
 #### Situation 4: Seeing what change was made
 
+Dickens' editor made a change, and left an unhelpful commit message. Let's see if we can tell what the change was.
+
 1. See that there's a new branch, `word-change`
 2. Take a look at it on Github to see what the change is.
 3. Give up
@@ -144,3 +146,4 @@ Try not to make too many changes where git would have been able to merge on its 
 
 - When merging, when would you use diffmerge over a normal text editor? What are the tradeoffs?
 - Have you used `git diff` in the past? When would you use that over `git difftool`?
+- Which of these things can you do with github? Can you think of a situation where github would be easier?
