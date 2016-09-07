@@ -46,7 +46,7 @@ Diffmerge will automatically open the files that need merging, and allow you to 
 
 ### Charles Dickens and his editor
 
-Not a lot of people know that while writing a tale of two cities, Charles Dickens used Git to more efficiently work with his editor. He was sick of his changes being overwritten by his editor, and found copying the editors changes he wanted to be inefficient.
+Not a lot of people know that while writing A Tale of Two Cities, Charles Dickens used Git to more efficiently work with his editor. He was sick of his changes being overwritten by his editor, and found copying the editors changes he wanted to be inefficient.
 
 #### Situation 1: Keeping one change, and dumping the other
 
@@ -82,16 +82,22 @@ If you type `git status` in your terminal, you should get the message `All confl
 
 #### Situation 2: Keeping both changes made to the same line
 
+Dickens has added a sentence near the beginning of chapter 5. His editor removed some semi-colons on the same line. We want to keep both changes.
 
+1. `git co chapter-5-edit`
+2. `git merge origin/clearer-punctuation`
 
 #### Situation 3: A change was made to a line that got moved
 
+Dickens' editor moved a paragraph. It just so happens to be the paragraph that Dickens wanted to edit.
+
+1. `git co -b chapter-3-removal`
 1. Open chapter3.txt
 2. Make a change to line 15
 3. `git merge origin/chapter-3-pacing`
 
 
-#### Situation 3: Seeing what change was made
+#### Situation 4: Seeing what change was made
 
 1. See that there's a new branch, `word-change`
 2. Take a look at it on Github to see what the change is.
