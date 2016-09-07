@@ -108,7 +108,7 @@ Open up `merchant.rb`. Rails Engine RETURNS!!!!
 
 There's three class methods that should be instance methods. Refactor `self.revenue_to_merchant`, `self.top_customer` and `self.pending_invoice` to be instance methods.
 
-Then merge `origin/merchant-method-order`
+Then merge `origin/merchant-method-order`. Make sure that changes from both branches are kept.
 
 Pro tip: You may want to see what changes have been made on the remote branch, either using difftool or github.
 
@@ -127,3 +127,14 @@ git difftool origin/master
 # Then merge
 git merge origin/master
 ```
+
+#### Force use of diffmerge on a merge
+
+If you want more granular control over a merge, you can replace `merge` with `mergetool` any time you're merging branches. You'll be asked to review each file that's going to change, but it allows you to double check things.
+
+Try not to make too many changes where git would have been able to merge on its own. Most developers expect merge commits to not include any changes that haven't already been committed elsewhere.
+
+## Closing thoughts
+
+- When merging, when would you use diffmerge over a normal text editor? What are the tradeoffs?
+- Have you used `git diff` in the past? When would you use that over `git difftool`?
